@@ -1,5 +1,7 @@
 <script type="module" src="./keyboard-key.js"></script>
 
+<pre><code></code></pre>
+
 <div id="keyboard"></div>
 
 <script>
@@ -13,16 +15,35 @@ const keyboardElement = document.querySelector('#keyboard')
 
 config.forEach(row => {
   row.forEach(key => {
-    const keyElement = document.createElement('keyboard-key');
+    if (typeof key === 'string' && key !== "") {
+      const keyElement = document.createElement('keyboard-key');
 
-    const [shift, ignored, main] = key.split('');
+      let shift;
+      let main;
 
-    keyElement.innerHTML = `
-      <span slot="shift">${shift}</span>
-      <span slot="main">${main}</span>
-    `;
+      if (key.indexOf('\n') !== -1) {
+        [shift, main] = key.split('\n');
+      } else {
+        main = key;
+      }
 
-    keyboardElement.appendChild(keyElement);
+      if (!main) {
+        console.log({ key });
+      }
+
+      if (!shift) {
+        console.log({ key });
+      }
+
+      keyElement.innerHTML = `
+        <span slot="shift">${shift || ''}</span>
+        <span slot="main">${main}</span>
+      `;
+
+      keyboardElement.appendChild(keyElement);
+    }
   });
 });
+
+document.querySelector('code').textContent = JSON.stringify(config, null, 4);
 </script>
