@@ -13,7 +13,14 @@ style.textContent = `
     border: 1px solid black;
     font-size: 12px;
     box-sizing: border-box;
-    box-shadow: inset 6px 3px 0 #cccccc, inset -6px -6px 0 #cccccc, inset 6px -6px 0 #cccccc, inset -6px 3px 0 #cccccc;
+    box-shadow: inset 6px 3px 0 #ccc, inset -6px -6px 0 #ccc, inset 6px -6px 0 #ccc, inset -6px 3px 0 #ccc;
+    transition: box-shadow 50ms ease;
+    user-select: none;
+  }
+
+  :host(:active) {
+    background-color: #eee;
+    box-shadow: inset 6px 6px 0 #bbb, inset -6px -6px 0 #bbb, inset 6px -6px 0 #bbb, inset -6px 6px 0 #bbb;
   }
 
   ::slotted(span) {

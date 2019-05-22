@@ -2,7 +2,7 @@
 
 <div id="keyboard" style="width:830px"></div>
 
-<pre><code></code></pre>
+<pre><code contenteditable="true"></code></pre>
 
 <script>
 const config = [["~\n`","!\n1","@\n2","#\n3","$\n4","%\n5","^\n6","&\n7","*\n8","(\n9",")\n0","_\n-","+\n=",{w:2},"Backspace"],
@@ -13,7 +13,10 @@ const config = [["~\n`","!\n1","@\n2","#\n3","$\n4","%\n5","^\n6","&\n7","*\n8",
 
 const keyboardElement = document.querySelector('#keyboard')
 
-config.forEach(row => {
+function render() {
+  keyboardElement.innerHTML = null;
+
+  config.forEach(row => {
   row.forEach((key, index) => {
     if (typeof key === 'string') {
       const keyElement = document.createElement('keyboard-key');
@@ -49,6 +52,10 @@ config.forEach(row => {
     }
   });
 });
+}
 
 document.querySelector('code').textContent = JSON.stringify(config, null, 4);
+document.querySelector('code').addEventListener('input', () => render(document.querySelector('code').textContent));
+
+render(config);
 </script>
