@@ -4,7 +4,7 @@ style.textContent = `
   :host {
     background-color: white;
     font-family: Helvetica, Arial, sans-serif;
-    width: 54px;
+    min-width: 54px;
     height: 54px;
     contain: strict;
     display: inline-block;
@@ -12,15 +12,12 @@ style.textContent = `
     border-radius: 6px;
     border: 1px solid black;
     font-size: 12px;
+    box-sizing: border-box;
     box-shadow: inset 6px 3px 0 #cccccc, inset -6px -6px 0 #cccccc, inset 6px -6px 0 #cccccc, inset -6px 3px 0 #cccccc;
   }
 
-  :host([width=2]) {
-    width: 108px;
-  }
-
   ::slotted(span) {
-    margin: 8px;
+    margin: 9px;
   }
 
   ::slotted([slot="shift"]) {
@@ -55,6 +52,12 @@ class KeyboardKey extends HTMLElement {
     this.sDOM = this.attachShadow({ mode: 'closed'});
     this.sDOM.appendChild(style.cloneNode(true));
     this.sDOM.appendChild(template.content.cloneNode(true));
+
+    const dataWidth = this.getAttribute('data-width');
+
+    if (dataWidth) {
+      this.style.width = `${dataWidth}px`;
+    }
   }
 }
 

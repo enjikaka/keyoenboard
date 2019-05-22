@@ -2,7 +2,7 @@
 
 <pre><code></code></pre>
 
-<div id="keyboard"></div>
+<div id="keyboard" style="width:830px"></div>
 
 <script>
 const config = [["~\n`","!\n1","@\n2","#\n3","$\n4","%\n5","^\n6","&\n7","*\n8","(\n9",")\n0","_\n-","+\n=",{w:2},"Backspace"],
@@ -14,12 +14,17 @@ const config = [["~\n`","!\n1","@\n2","#\n3","$\n4","%\n5","^\n6","&\n7","*\n8",
 const keyboardElement = document.querySelector('#keyboard')
 
 config.forEach(row => {
-  row.forEach(key => {
+  row.forEach((key, index) => {
     if (typeof key === 'string' && key !== "") {
       const keyElement = document.createElement('keyboard-key');
 
       let shift;
       let main;
+      let width;
+
+      if (typeof row[index-1] === 'object' && row[index-1].w) {
+        keyElement.setAttribute('data-width', 54 * row[index-1].w);
+      }
 
       if (key.indexOf('\n') !== -1) {
         [shift, main] = key.split('\n');
