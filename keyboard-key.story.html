@@ -15,7 +15,7 @@ const keyboardElement = document.querySelector('#keyboard')
 
 config.forEach(row => {
   row.forEach((key, index) => {
-    if (typeof key === 'string' && key !== "") {
+    if (typeof key === 'string') {
       const keyElement = document.createElement('keyboard-key');
 
       let shift;
